@@ -1,8 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "My Next App",
-  description: "Next.js로 만든 웹사이트",
+  title: "Won Jiyeon — Designer",
+  description: "Won Jiyeon, visual communication designer based in Seoul.",
 };
 
 export default function RootLayout({ children }) {
