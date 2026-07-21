@@ -13,6 +13,7 @@
 
 * {
   box-sizing: border-box;
+  cursor: url("/figma-assets/custom-cursor.png") 0 0, auto;
 }
 
 html,
