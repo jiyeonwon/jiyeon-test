@@ -317,6 +317,147 @@ button {
   73%, 100% { opacity: 1; }
 }
 
+.detailCanvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(100%, calc(100svh * 1.40625));
+  aspect-ratio: 1440 / 1024;
+  container-type: size;
+  transform: translate(-50%, -50%);
+}
+
+.infoPanel {
+  position: absolute;
+  top: 15.0390625%;
+  left: 21.52777778%;
+  width: 56.80555556%;
+  height: 54.98046875%;
+  overflow: hidden;
+  background: white;
+}
+
+.infoPanelHOMETOWN {
+  height: 52.05078125%;
+}
+
+.infoPanelHeader {
+  display: flex;
+  width: 100%;
+  height: 13.4991119%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.07823961%;
+  background: #d9fff8;
+}
+
+.infoPanelHOMETOWN .infoPanelHeader {
+  height: 14.25891182%;
+}
+
+.infoPanelHeader h2,
+.infoPanelHeader button {
+  margin: 0;
+  font-size: clamp(12px, 1.66666667cqw, 24px);
+  font-weight: 500;
+  line-height: clamp(20px, 3.90625cqh, 40px);
+}
+
+.infoPanelHeader button {
+  width: 5.01222494%;
+  height: 60.52631579%;
+  min-width: 24px;
+  min-height: 28px;
+  padding: 0;
+  border: 1px solid var(--black);
+  background: transparent;
+  cursor: pointer;
+}
+
+.infoPanelHeader button:hover,
+.infoPanelHeader button:focus-visible {
+  color: var(--mint-400);
+  background: var(--black);
+  outline: none;
+}
+
+.infoHeadline,
+.infoBody,
+.toolList {
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin: 0;
+  font-size: clamp(12px, 1.66666667cqw, 24px);
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.infoHeadline {
+  top: 26.28774423%;
+}
+
+.infoBody {
+  top: 50.08880995%;
+}
+
+.infoPanelHOMETOWN .infoBody {
+  top: 52.90806754%;
+}
+
+.infoPanelMBTI .infoBody {
+  top: 53.9964476%;
+}
+
+.infoBody p,
+.toolList p {
+  margin: 0;
+}
+
+.toolList {
+  top: 25.93250444%;
+  line-height: clamp(20px, 3.90625cqh, 40px);
+}
+
+.infoPanelTOOLS .infoBody {
+  top: 81.88277087%;
+  white-space: nowrap;
+}
+
+.detailScreenNav {
+  position: absolute;
+  top: 79.78515625%;
+  left: 12.84722222%;
+  display: flex;
+  align-items: center;
+  gap: clamp(112px, 15.625cqw, 225px);
+}
+
+.detailScreenNav button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: clamp(12px, 1.66666667cqw, 24px);
+  font-weight: 500;
+  line-height: clamp(20px, 3.90625cqh, 40px);
+  cursor: pointer;
+}
+
+.detailScreenNav button:hover,
+.detailScreenNav button:focus-visible {
+  text-decoration: underline;
+  outline: none;
+}
+
+.detailScreenLine {
+  position: absolute;
+  top: 87.59765625%;
+  left: 6.73611111%;
+  width: 84.93055556%;
+  border-top: 1px solid var(--black);
+}
+
 .cornerBlocks {
   position: absolute;
   z-index: 2;
