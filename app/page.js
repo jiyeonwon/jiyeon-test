@@ -158,6 +158,29 @@ function MenuSection({ sectionRef, onAbout, onHobbies, onFavorites }) {
   );
 }
 
+function OpenCapsule() {
+  return (
+    <div className="openCapsuleMotion" aria-hidden="true">
+      <Image
+        className="openCapsulePart openCapsuleTop"
+        src="/figma-assets/desktop8-capsule-top.png"
+        alt=""
+        width={314}
+        height={161}
+        unoptimized
+      />
+      <Image
+        className="openCapsulePart openCapsuleBottom"
+        src="/figma-assets/desktop8-capsule-bottom.png"
+        alt=""
+        width={314}
+        height={153}
+        unoptimized
+      />
+    </div>
+  );
+}
+
 function FavoritesSection({ sectionRef, onBack, onDetail }) {
   return (
     <section ref={sectionRef} className="screen favoritesScreen" aria-label="Favorites 상세">
@@ -168,7 +191,7 @@ function FavoritesSection({ sectionRef, onBack, onDetail }) {
           </button>
 
           <div className="aboutCapsule">
-            <Image src="/figma-assets/desktop8-4.png" alt="" width={314} height={314} unoptimized />
+            <OpenCapsule />
             <h2>[ FAVORITES ]</h2>
           </div>
         </div>
@@ -204,7 +227,7 @@ function HobbiesSection({ sectionRef, onBack, onDetail }) {
           </button>
 
           <div className="aboutCapsule">
-            <Image src="/figma-assets/desktop8-4.png" alt="" width={314} height={314} unoptimized />
+            <OpenCapsule />
             <h2>[ HOBBIES ]</h2>
           </div>
         </div>
@@ -240,13 +263,7 @@ function AboutSection({ sectionRef, onBack, onDetail }) {
           </button>
 
           <div className="aboutCapsule">
-            <Image
-              src="/figma-assets/desktop8-4.png"
-              alt=""
-              width={314}
-              height={314}
-              unoptimized
-            />
+            <OpenCapsule />
             <h2>[ ABOUT ME ]</h2>
           </div>
         </div>

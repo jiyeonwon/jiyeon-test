@@ -304,12 +304,70 @@ button {
   align-items: center;
 }
 
-.aboutCapsule img {
+.openCapsuleMotion {
+  position: relative;
   width: 100%;
   aspect-ratio: 1;
   flex: 0 0 auto;
-  object-fit: cover;
+  transform-origin: 50% 50%;
+  animation: openCapsuleBreath 2.8s ease-in-out infinite;
+  will-change: transform;
+}
+
+.openCapsulePart {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  object-fit: contain;
   image-rendering: pixelated;
+  will-change: transform;
+}
+
+.openCapsuleTop {
+  top: 0;
+  height: 51.27388535%;
+  transform-origin: 50% 100%;
+  animation: openCapsuleTop 2.8s ease-in-out infinite;
+}
+
+.openCapsuleBottom {
+  top: 51.27388535%;
+  height: 48.72611465%;
+  transform-origin: 50% 0;
+  animation: openCapsuleBottom 2.8s ease-in-out infinite;
+}
+
+@keyframes openCapsuleBreath {
+  0%,
+  100% {
+    transform: scaleY(1.01);
+  }
+
+  50% {
+    transform: scaleY(0.99);
+  }
+}
+
+@keyframes openCapsuleTop {
+  0%,
+  100% {
+    transform: translateY(-2px) rotate(-0.5deg);
+  }
+
+  50% {
+    transform: translateY(2px) rotate(0.5deg);
+  }
+}
+
+@keyframes openCapsuleBottom {
+  0%,
+  100% {
+    transform: translateY(1px);
+  }
+
+  50% {
+    transform: translateY(-1px);
+  }
 }
 
 .aboutCapsule h2 {
