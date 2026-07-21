@@ -252,7 +252,7 @@ button {
 }
 
 .aboutCapsule h2 {
-  margin: 0;
+  margin: 16px 0 0;
   font-size: clamp(12px, 1.66666667cqw, 24px);
   font-weight: 600;
   line-height: clamp(20px, 3.90625cqh, 40px);
