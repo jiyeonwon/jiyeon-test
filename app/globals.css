@@ -135,16 +135,19 @@ button {
 
 .capsuleMenu {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 235px));
+  column-gap: clamp(40px, 8.17708333vw, 117.75px);
   align-items: end;
+  justify-content: center;
   margin-bottom: 155px;
+  transform: translateX(12px);
 }
 
 .capsuleItem {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 0;
   padding: 0;
   border: 0;
   background: transparent;
@@ -554,6 +557,7 @@ button {
     grid-template-columns: 1fr;
     gap: 24px;
     margin: auto 0 60px;
+    transform: none;
   }
 
   .capsuleItem {
