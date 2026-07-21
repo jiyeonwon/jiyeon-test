@@ -208,6 +208,10 @@ export default function Home() {
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const jumpTo = (ref) => {
+    ref.current?.scrollIntoView({ behavior: "instant", block: "start" });
+  };
+
   return (
     <main className="pageFlow">
       <IntroSection onStart={() => scrollTo(menuRef)} />
@@ -215,15 +219,15 @@ export default function Home() {
       <AboutSection
         sectionRef={aboutRef}
         onBack={() => scrollTo(menuRef)}
-        onDetail={(type) => scrollTo(detailRefs[type])}
+        onDetail={(type) => jumpTo(detailRefs[type])}
       />
       {detailItems.map((type) => (
         <DetailSection
           key={type}
           sectionRef={detailRefs[type]}
           type={type}
-          onClose={() => scrollTo(aboutRef)}
-          onNavigate={(nextType) => scrollTo(detailRefs[nextType])}
+          onClose={() => jumpTo(aboutRef)}
+          onNavigate={(nextType) => jumpTo(detailRefs[nextType])}
         />
       ))}
     </main>
