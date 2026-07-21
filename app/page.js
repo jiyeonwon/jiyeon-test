@@ -50,7 +50,7 @@ const hobbyContent = {
       "모자 수집하는게 취미입니다.",
       "집에 모자가 몇 개 있냐는 질문을 종종 듣곤 하는데요.",
       "한 12개 정도 되는 것 같네요.",
-      "사도사도 부족해요...",
+      "사도 사도 부족해요...",
     ],
   },
   NAPS: {
@@ -152,7 +152,7 @@ function MenuSection({ sectionRef, onAbout, onHobbies, onFavorites }) {
           ))}
         </div>
 
-        <p className="menuGuide">캡슐을 클릭하여 더 많은 정보를 확인 해보세요!</p>
+        <p className="menuGuide">캡슐을 클릭하여 더 많은 정보를 확인해 보세요!</p>
       </div>
     </section>
   );
@@ -210,7 +210,7 @@ function FavoritesSection({ sectionRef, onBack, onDetail }) {
               </button>
             ))}
           </nav>
-          <p>하단의 단어를 클릭하여 더 자세한 정보를 확인 해보세요!</p>
+          <p>하단의 단어를 클릭하여 더 자세한 정보를 확인해 보세요!</p>
         </div>
       </div>
     </section>
@@ -246,7 +246,7 @@ function HobbiesSection({ sectionRef, onBack, onDetail }) {
               </button>
             ))}
           </nav>
-          <p>하단의 단어를 클릭하여 더 자세한 정보를 확인 해보세요!</p>
+          <p>하단의 단어를 클릭하여 더 자세한 정보를 확인해 보세요!</p>
         </div>
       </div>
     </section>
@@ -282,7 +282,7 @@ function AboutSection({ sectionRef, onBack, onDetail }) {
               </button>
             ))}
           </nav>
-          <p>하단의 단어를 클릭하여 더 자세한 정보를 확인 해보세요!</p>
+          <p>하단의 단어를 클릭하여 더 자세한 정보를 확인해 보세요!</p>
         </div>
       </div>
     </section>
