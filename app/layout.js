@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Won Jiyeon — Designer",
+  title: "Won Jiyeon — Portfolio",
   description: "Won Jiyeon, visual communication designer based in Seoul.",
 };
 

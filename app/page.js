@@ -1,77 +1,94 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
-const profile = {
-  location: ["Based in Seoul, KR", "Hongik University", "Visual Communication Design"],
-  contact: ["Contact", "+82 10-3160-8240", "jiyeon.direct@gmail.com"],
-};
+const capsuleItems = ["ABOUT ME", "HOBBIES", "FAVORITES"];
 
-function TextGroup({ children }) {
-  const [isLarge, setIsLarge] = useState(false);
+function GridOverlay() {
+  return <div className="gridOverlay" aria-hidden="true" />;
+}
 
+function IntroScreen({ onStart }) {
   return (
-    <button
-      type="button"
-      className={`textGroup${isLarge ? " isLarge" : ""}`}
-      onClick={() => setIsLarge((current) => !current)}
-      onMouseLeave={() => setIsLarge(false)}
-      aria-pressed={isLarge}
-    >
-      {children}
-    </button>
+    <main className="screen introScreen">
+      <GridOverlay />
+
+      <div className="designContainer introLayout">
+        <h1>WON JIYEON</h1>
+
+        <div className="profileCopy">
+          <p>Based in Seoul, KR</p>
+          <p>
+            Hongik University
+            <br />
+            Visual Communication Design
+          </p>
+          <p>
+            [ Contact ]
+            <br />
+            <br />
+            +82 10-3160-8240
+            <br />
+            jiyeon.direct@gmail.com
+          </p>
+        </div>
+
+        <button className="startButton" type="button" onClick={onStart}>
+          <span>Click to Start!</span>
+          <Image
+            className="cursorImage"
+            src="/figma-assets/desktop6-cursor.png"
+            alt=""
+            width={94}
+            height={94}
+            priority
+          />
+        </button>
+      </div>
+    </main>
+  );
+}
+
+function MenuScreen() {
+  return (
+    <main className="screen menuScreen">
+      <GridOverlay />
+      <div className="cornerBlocks cornerBlocksLeft" aria-hidden="true">
+        <i /><i /><i />
+      </div>
+      <div className="cornerBlocks cornerBlocksRight" aria-hidden="true">
+        <i /><i /><i />
+      </div>
+
+      <div className="designContainer menuLayout">
+        <section className="capsuleMenu" aria-label="프로필 메뉴">
+          {capsuleItems.map((item) => (
+            <button className="capsuleItem" type="button" key={item}>
+              <Image
+                src="/figma-assets/desktop7-4.png"
+                alt=""
+                width={314}
+                height={314}
+                unoptimized
+              />
+              <span>[ {item} ]</span>
+            </button>
+          ))}
+        </section>
+
+        <p className="menuGuide">캡슐을 눌러서 더 많은 정보를 확인해보세요!</p>
+      </div>
+    </main>
   );
 }
 
 export default function Home() {
-  return (
-    <main className="portfolio">
-      <header className="intro grid">
-        <h1><TextGroup>WON JIYEON</TextGroup></h1>
+  const [hasStarted, setHasStarted] = useState(false);
 
-        <div className="infoBlock">
-          {profile.location.map((line) => (
-            <p key={line}><TextGroup>{line}</TextGroup></p>
-          ))}
-        </div>
-
-        <address className="infoBlock">
-          <p><TextGroup>{profile.contact[0]}</TextGroup></p>
-          <p><TextGroup>{profile.contact[1]}</TextGroup></p>
-          <p><TextGroup>{profile.contact[2]}</TextGroup></p>
-        </address>
-      </header>
-
-      <section className="services grid" aria-label="Services">
-        <p><TextGroup>Graphic Design</TextGroup></p>
-        <p><TextGroup>Brand Identity Design</TextGroup></p>
-        <p><TextGroup>UX/UI Design</TextGroup></p>
-      </section>
-
-      <section className="about grid" aria-labelledby="about-title">
-        <h2 id="about-title"><TextGroup>[ ABOUT ]</TextGroup></h2>
-
-        <dl>
-          <div>
-            <dt><TextGroup>BORN</TextGroup></dt>
-            <dd><TextGroup>2005.04.17</TextGroup></dd>
-          </div>
-        </dl>
-
-        <dl>
-          <div>
-            <dt><TextGroup>HOMETOWN</TextGroup></dt>
-            <dd><TextGroup>Daegu, South Korea</TextGroup></dd>
-          </div>
-        </dl>
-      </section>
-
-      <section className="likes grid" aria-labelledby="likes-title">
-        <h2 id="likes-title"><TextGroup>[ Things I Like ]</TextGroup></h2>
-        <p><TextGroup>COFFEE</TextGroup></p>
-        <p><TextGroup>RILAKKUMA</TextGroup></p>
-      </section>
-
-    </main>
+  return hasStarted ? (
+    <MenuScreen />
+  ) : (
+    <IntroScreen onStart={() => setHasStarted(true)} />
   );
 }
