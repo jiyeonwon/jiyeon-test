@@ -313,6 +313,17 @@ button {
   white-space: nowrap;
 }
 
+.favoriteNav {
+  display: flex;
+  width: 100%;
+  height: clamp(40px, 7.8125cqh, 80px);
+  align-items: center;
+  justify-content: center;
+  gap: clamp(112px, 15.625cqw, 225px);
+  padding-bottom: clamp(19px, 3.80859375cqh, 39px);
+  border-bottom: 1px solid var(--black);
+}
+
 .blinkWord {
   padding: 0;
   border: 0;
@@ -555,6 +566,77 @@ button {
   position: absolute;
   top: 86.9140625%;
   left: 4.16666667%;
+  width: 84.93055556%;
+  border-top: 1px solid var(--black);
+}
+
+.favoritePanel .favoriteDetailImage {
+  position: absolute;
+  left: 50%;
+  height: auto;
+  object-fit: contain;
+  image-rendering: pixelated;
+  transform: translateX(-50%);
+}
+
+.favoritePanelRILAKKUMA .favoriteDetailImage {
+  top: 15.63055062%;
+  width: 28.36185819%;
+}
+
+.favoritePanelDONUT .favoriteDetailImage {
+  top: 18.29484902%;
+  width: 32.27383863%;
+}
+
+.favoritePanelCOFFEE .favoriteDetailImage {
+  top: 16.3410302%;
+  width: 34.84107579%;
+}
+
+.favoriteInfoBody {
+  top: 64.29840142%;
+}
+
+.favoritePanelDONUT .favoriteInfoBody {
+  top: 71.22557726%;
+}
+
+.favoritePanelCOFFEE .favoriteInfoBody {
+  top: 69.80461812%;
+}
+
+.favoriteDetailNav {
+  position: absolute;
+  top: 79.78515625%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: clamp(112px, 15.625cqw, 225px);
+  transform: translateX(-50%);
+}
+
+.favoriteDetailNav button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: clamp(12px, 1.66666667cqw, 24px);
+  font-weight: 500;
+  line-height: clamp(20px, 3.90625cqh, 40px);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.favoriteDetailNav button:hover,
+.favoriteDetailNav button:focus-visible {
+  text-decoration: underline;
+  outline: none;
+}
+
+.favoriteDetailLine {
+  position: absolute;
+  top: 87.59765625%;
+  left: 6.73611111%;
   width: 84.93055556%;
   border-top: 1px solid var(--black);
 }

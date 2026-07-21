@@ -6,6 +6,7 @@ import { useRef } from "react";
 const capsuleItems = ["ABOUT ME", "HOBBIES", "FAVORITES"];
 const detailItems = ["HOMETOWN", "BIRTHDAY", "MBTI", "TOOLS"];
 const hobbyItems = ["GAME", "COLLECTING CAPS", "NAPS"];
+const favoriteItems = ["RILAKKUMA", "DONUT", "COFFEE"];
 const detailContent = {
   HOMETOWN: {
     headline: "Daegu, Korea",
@@ -57,6 +58,20 @@ const hobbyContent = {
     body: ["낮잠자기!", "개강을 하면 누리기 힘든 취미이기 때문에...", "방학인 지금 많이 누리려고 합니다."],
   },
 };
+const favoriteContent = {
+  RILAKKUMA: {
+    image: "/figma-assets/favorite-rilakkuma.png",
+    body: ["리락쿠마가 좋아요...", "근데 매번 리락쿠마 좋아하는게", "저랑 안어울린다는 말을 들어서 슬퍼요"],
+  },
+  DONUT: {
+    image: "/figma-assets/favorite-donut.png",
+    body: ["크리스피 크림 도넛 좋아하시는 분?", "왠지 저랑 잘 맞으실 듯 하네요"],
+  },
+  COFFEE: {
+    image: "/figma-assets/favorite-coffee.png",
+    body: ["저는 커피를 하루에 한 잔은 무조건 마시는 사람입니다.", "특이한 점은 겨울에도 아이스아메리카노만 마신다는 점.."],
+  },
+};
 
 function IntroSection({ onStart }) {
   return (
@@ -106,7 +121,7 @@ function IntroSection({ onStart }) {
   );
 }
 
-function MenuSection({ sectionRef, onAbout, onHobbies }) {
+function MenuSection({ sectionRef, onAbout, onHobbies, onFavorites }) {
   return (
     <section ref={sectionRef} className="screen menuScreen" aria-label="프로필 메뉴">
       <div className="cornerBlocks cornerBlocksLeft" aria-hidden="true">
@@ -123,7 +138,13 @@ function MenuSection({ sectionRef, onAbout, onHobbies }) {
               className="capsuleItem"
               type="button"
               key={item}
-              onClick={item === "ABOUT ME" ? onAbout : item === "HOBBIES" ? onHobbies : undefined}
+              onClick={
+                item === "ABOUT ME"
+                  ? onAbout
+                  : item === "HOBBIES"
+                    ? onHobbies
+                    : onFavorites
+              }
             >
               <Image
                 src="/figma-assets/desktop7-4.png"
@@ -138,6 +159,42 @@ function MenuSection({ sectionRef, onAbout, onHobbies }) {
         </div>
 
         <p className="menuGuide">캡슐을 눌러서 더 많은 정보를 확인해보세요!</p>
+      </div>
+    </section>
+  );
+}
+
+function FavoritesSection({ sectionRef, onBack, onDetail }) {
+  return (
+    <section ref={sectionRef} className="screen favoritesScreen" aria-label="Favorites 상세">
+      <div className="aboutCanvas">
+        <div className="aboutMainRow">
+          <button className="aboutBackButton" type="button" onClick={onBack} aria-label="프로필 메뉴로 돌아가기">
+            <Image src="/figma-assets/desktop8-back.svg" alt="" width={94} height={74} />
+          </button>
+
+          <div className="aboutCapsule">
+            <Image src="/figma-assets/desktop8-4.png" alt="" width={314} height={314} unoptimized />
+            <h2>[ FAVORITES ]</h2>
+          </div>
+        </div>
+
+        <div className="aboutFooter">
+          <nav className="favoriteNav" aria-label="Favorites 정보">
+            {favoriteItems.map((item, index) => (
+              <button
+                className="blinkWord"
+                style={{ "--blink-delay": `${index * 0.28}s` }}
+                type="button"
+                key={item}
+                onClick={() => onDetail(item)}
+              >
+                {item}
+              </button>
+            ))}
+          </nav>
+          <p>하단의 단어를 클릭하여 더 저세한 정보를 확인해보세요!</p>
+        </div>
       </div>
     </section>
   );
@@ -291,6 +348,34 @@ function HobbyDetailSection({ sectionRef, type, onClose, onNavigate }) {
   );
 }
 
+function FavoriteDetailSection({ sectionRef, type, onClose, onNavigate }) {
+  const content = favoriteContent[type];
+
+  return (
+    <section ref={sectionRef} className="screen detailScreen" aria-label={`${type} 상세`}>
+      <div className="detailCanvas">
+        <article className={`infoPanel favoritePanel favoritePanel${type}`}>
+          <header className="infoPanelHeader">
+            <h2>{type}</h2>
+            <button type="button" onClick={onClose} aria-label={`${type} 닫기`}>X</button>
+          </header>
+          <Image className="favoriteDetailImage" src={content.image} alt="" width={285} height={285} unoptimized />
+          <div className="infoBody favoriteInfoBody">
+            {content.body.map((line) => <p key={line}>{line}</p>)}
+          </div>
+        </article>
+
+        <nav className="favoriteDetailNav" aria-label="Favorites 상세 메뉴">
+          {favoriteItems.map((item) => (
+            <button type="button" key={item} onClick={() => onNavigate(item)}>{item}</button>
+          ))}
+        </nav>
+        <div className="favoriteDetailLine" aria-hidden="true" />
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   const menuRef = useRef(null);
   const aboutRef = useRef(null);
@@ -302,6 +387,10 @@ export default function Home() {
   const gameRef = useRef(null);
   const capsRef = useRef(null);
   const napsRef = useRef(null);
+  const favoritesRef = useRef(null);
+  const rilakkumaRef = useRef(null);
+  const donutRef = useRef(null);
+  const coffeeRef = useRef(null);
 
   const detailRefs = {
     HOMETOWN: hometownRef,
@@ -313,6 +402,11 @@ export default function Home() {
     GAME: gameRef,
     "COLLECTING CAPS": capsRef,
     NAPS: napsRef,
+  };
+  const favoriteRefs = {
+    RILAKKUMA: rilakkumaRef,
+    DONUT: donutRef,
+    COFFEE: coffeeRef,
   };
 
   const scrollTo = (ref) => {
@@ -330,6 +424,7 @@ export default function Home() {
         sectionRef={menuRef}
         onAbout={() => scrollTo(aboutRef)}
         onHobbies={() => jumpTo(hobbiesRef)}
+        onFavorites={() => jumpTo(favoritesRef)}
       />
       <AboutSection
         sectionRef={aboutRef}
@@ -357,6 +452,20 @@ export default function Home() {
           type={type}
           onClose={() => jumpTo(hobbiesRef)}
           onNavigate={(nextType) => jumpTo(hobbyRefs[nextType])}
+        />
+      ))}
+      <FavoritesSection
+        sectionRef={favoritesRef}
+        onBack={() => jumpTo(menuRef)}
+        onDetail={(type) => jumpTo(favoriteRefs[type])}
+      />
+      {favoriteItems.map((type) => (
+        <FavoriteDetailSection
+          key={type}
+          sectionRef={favoriteRefs[type]}
+          type={type}
+          onClose={() => jumpTo(favoritesRef)}
+          onNavigate={(nextType) => jumpTo(favoriteRefs[nextType])}
         />
       ))}
     </main>
