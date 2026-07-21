@@ -13,20 +13,19 @@ function IntroSection({ onStart }) {
         <h1>WON JIYEON</h1>
 
         <div className="profileCopy">
-          <p>Based in Seoul, KR</p>
-          <p>
-            Hongik University
-            <br />
-            Visual Communication Design
-          </p>
-          <p>
-            [ Contact ]
-            <br />
-            <br />
-            +82 10-3160-8240
-            <br />
-            jiyeon.direct@gmail.com
-          </p>
+          <div className="profileBio">
+            <p>Based in Seoul, KR</p>
+            <p>
+              Hongik University
+              <br />
+              Visual Communication Design
+            </p>
+          </div>
+          <div className="profileContact">
+            <p>[ Contact ]</p>
+            <p>+82 10-3160-8240</p>
+            <p>jiyeon.direct@gmail.com</p>
+          </div>
         </div>
 
         <button className="startButton" type="button" onClick={onStart}>
@@ -85,36 +84,39 @@ function MenuSection({ sectionRef, onAbout }) {
 function AboutSection({ sectionRef, onBack }) {
   return (
     <section ref={sectionRef} className="screen aboutScreen" aria-label="About Me 상세">
-      <button className="backButton" type="button" onClick={onBack} aria-label="프로필 메뉴로 돌아가기">
-        <Image src="/figma-assets/desktop8-back.svg" alt="" width={109} height={99} />
-      </button>
+      <div className="aboutCanvas">
+        <div className="aboutMainRow">
+          <button className="aboutBackButton" type="button" onClick={onBack} aria-label="프로필 메뉴로 돌아가기">
+            <Image src="/figma-assets/desktop8-back.svg" alt="" width={94} height={74} />
+          </button>
 
-      <div className="designContainer aboutLayout">
-        <div className="aboutCapsule">
-          <Image
-            src="/figma-assets/desktop8-4.png"
-            alt=""
-            width={314}
-            height={314}
-            unoptimized
-          />
-          <h2>[ ABOUT ME ]</h2>
+          <div className="aboutCapsule">
+            <Image
+              src="/figma-assets/desktop8-4.png"
+              alt=""
+              width={314}
+              height={314}
+              unoptimized
+            />
+            <h2>[ ABOUT ME ]</h2>
+          </div>
         </div>
 
-        <nav className="detailNav" aria-label="About Me 정보">
-          {detailItems.map((item, index) => (
-            <button
-              className="blinkWord"
-              style={{ "--blink-delay": `${index * 0.28}s` }}
-              type="button"
-              key={item}
-            >
-              {item}
-            </button>
-          ))}
-        </nav>
-
-        <p className="aboutGuide">하단의 단어를 클릭하여 더 자세한 정보를 확인해보세요!</p>
+        <div className="aboutFooter">
+          <nav className="detailNav" aria-label="About Me 정보">
+            {detailItems.map((item, index) => (
+              <button
+                className="blinkWord"
+                style={{ "--blink-delay": `${index * 0.28}s` }}
+                type="button"
+                key={item}
+              >
+                {item}
+              </button>
+            ))}
+          </nav>
+          <p>하단의 단어를 클릭하여 더 저세한 정보를 확인해보세요!</p>
+        </div>
       </div>
     </section>
   );

@@ -75,7 +75,15 @@ button {
 }
 
 .profileCopy p {
-  margin: 0 0 20px;
+  margin: 0;
+}
+
+.profileBio p:first-child {
+  margin-bottom: 40px;
+}
+
+.profileContact {
+  margin-top: 68px;
 }
 
 .startButton {
@@ -177,17 +185,34 @@ button {
   text-align: center;
 }
 
-.aboutLayout {
-  min-height: 100svh;
+.aboutCanvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(100%, calc(100svh * 1.40625));
+  aspect-ratio: 1440 / 1024;
+  container-type: size;
+  transform: translate(-50%, -50%);
 }
 
-.backButton {
+.aboutMainRow {
   position: absolute;
-  z-index: 3;
-  top: 58px;
-  left: 24px;
-  width: 109px;
-  height: 99px;
+  top: 7.32421875%;
+  left: 2.36111111%;
+  display: flex;
+  width: 65.41666667%;
+  height: 65.625%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.aboutBackButton {
+  position: relative;
+  display: flex;
+  width: 10.50955414%;
+  height: 16.2202381%;
+  align-items: center;
+  justify-content: center;
   padding: 0;
   border: 0;
   background: transparent;
@@ -195,50 +220,65 @@ button {
   transition: transform 180ms ease;
 }
 
-.backButton img {
-  width: 100%;
-  height: 100%;
+.aboutBackButton img {
+  position: absolute;
+  top: 16.05%;
+  left: -10.1%;
+  width: 95.35%;
+  height: 68.12%;
+  transform: rotate(-90deg);
 }
 
-.backButton:hover,
-.backButton:focus-visible {
+.aboutBackButton:hover,
+.aboutBackButton:focus-visible {
   outline: none;
   transform: translateX(-8px);
 }
 
 .aboutCapsule {
-  position: absolute;
-  top: 10.2svh;
-  left: 50%;
   display: flex;
+  width: 54.35244161%;
+  height: 100%;
   flex-direction: column;
   align-items: center;
-  transform: translateX(-50%);
 }
 
 .aboutCapsule img {
-  width: 512px;
-  height: 512px;
-  object-fit: contain;
+  width: 100%;
+  aspect-ratio: 1;
+  flex: 0 0 auto;
+  object-fit: cover;
   image-rendering: pixelated;
 }
 
 .aboutCapsule h2 {
   margin: 0;
-  font-size: 24px;
+  font-size: clamp(12px, 1.66666667cqw, 24px);
   font-weight: 600;
-  line-height: 40px;
+  line-height: clamp(20px, 3.90625cqh, 40px);
+}
+
+.aboutFooter {
+  position: absolute;
+  top: 75.87890625%;
+  left: 50%;
+  display: flex;
+  width: 84.93055556%;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(31px, 6.15234375cqh, 63px);
+  transform: translateX(-50%);
 }
 
 .detailNav {
-  position: absolute;
-  right: 12px;
-  bottom: 167px;
-  left: 13px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 11.52902698% 9.32134096% 5.15126738% 6.37775961%;
+  width: 100%;
+  height: clamp(40px, 7.8125cqh, 80px);
   align-items: center;
-  padding-bottom: 40px;
+  justify-content: center;
+  column-gap: 18.39738348%;
+  padding-bottom: clamp(19px, 3.80859375cqh, 39px);
   border-bottom: 1px solid var(--black);
 }
 
@@ -246,9 +286,9 @@ button {
   padding: 0;
   border: 0;
   background: transparent;
-  font-size: 24px;
+  font-size: clamp(12px, 1.66666667cqw, 24px);
   font-weight: 500;
-  line-height: 40px;
+  line-height: clamp(20px, 3.90625cqh, 40px);
   cursor: pointer;
   animation: blinkWord 1.7s steps(2, jump-none) infinite;
   animation-delay: var(--blink-delay);
@@ -262,15 +302,12 @@ button {
   outline-offset: 8px;
 }
 
-.aboutGuide {
-  position: absolute;
-  right: 0;
-  bottom: 39px;
-  left: 0;
+.aboutFooter p {
+  width: 100%;
   margin: 0;
-  font-size: 32px;
+  font-size: clamp(16px, 2.22222222cqw, 32px);
   font-weight: 500;
-  line-height: 40px;
+  line-height: clamp(20px, 3.90625cqh, 40px);
   text-align: center;
 }
 
@@ -331,6 +368,14 @@ button {
     line-height: 30px;
   }
 
+  .profileBio p:first-child {
+    margin-bottom: 30px;
+  }
+
+  .profileContact {
+    margin-top: 42px;
+  }
+
   .startButton {
     bottom: 32px;
     grid-template-columns: 1fr 76px;
@@ -389,47 +434,6 @@ button {
     font-size: 20px;
   }
 
-  .backButton {
-    top: 24px;
-    left: 12px;
-    width: 58px;
-    height: 54px;
-  }
-
-  .aboutCapsule {
-    top: 13svh;
-  }
-
-  .aboutCapsule img {
-    width: min(82vw, 360px);
-    height: min(82vw, 360px);
-  }
-
-  .aboutCapsule h2 {
-    font-size: 19px;
-    line-height: 30px;
-  }
-
-  .detailNav {
-    right: 0;
-    bottom: 132px;
-    left: 0;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px 12px;
-    padding-bottom: 24px;
-  }
-
-  .blinkWord {
-    font-size: 17px;
-    line-height: 28px;
-  }
-
-  .aboutGuide {
-    bottom: 30px;
-    padding: 0 10px;
-    font-size: 18px;
-    line-height: 28px;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
