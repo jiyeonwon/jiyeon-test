@@ -422,7 +422,7 @@ export default function Home() {
       <IntroSection onStart={() => scrollTo(menuRef)} />
       <MenuSection
         sectionRef={menuRef}
-        onAbout={() => scrollTo(aboutRef)}
+        onAbout={() => jumpTo(aboutRef)}
         onHobbies={() => jumpTo(hobbiesRef)}
         onFavorites={() => jumpTo(favoritesRef)}
       />
