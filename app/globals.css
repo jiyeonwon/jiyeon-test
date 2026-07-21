@@ -88,7 +88,8 @@ button {
 
 .introCharacter {
   position: absolute;
-  top: 54.39453125svh;
+  top: auto;
+  bottom: calc(8.9svh + 112px);
   left: 50%;
   width: 264px;
   height: 264px;
