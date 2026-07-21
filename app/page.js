@@ -5,6 +5,7 @@ import { useRef } from "react";
 
 const capsuleItems = ["ABOUT ME", "HOBBIES", "FAVORITES"];
 const detailItems = ["HOMETOWN", "BIRTHDAY", "MBTI", "TOOLS"];
+const hobbyItems = ["GAME", "COLLECTING CAPS", "NAPS"];
 const detailContent = {
   HOMETOWN: {
     headline: "Daegu, Korea",
@@ -35,6 +36,25 @@ const detailContent = {
   TOOLS: {
     list: ["Figma", "Photoshop", "Illustrator", "InDesign", "Lightroom", "After Effects"],
     body: ["배워야 되는 툴을 끝도 없이 늘어나고 제 머리는 그걸 거부해서 걱정입니다.."],
+  },
+};
+const hobbyContent = {
+  GAME: {
+    image: "/figma-assets/hobby-game.png",
+    body: ["저는 PC게임을 좋아해요.", "요즘 빠진건 배틀그라운드인데요.", "저랑 배그 하실 분?"],
+  },
+  "COLLECTING CAPS": {
+    image: "/figma-assets/hobby-caps.png",
+    body: [
+      "모자 수집하는게 취미입니다.",
+      "집에 모자가 몇 개 있냐는 질문을 종종 듣곤 하는데요.",
+      "한 12개 정도 되는 것 같네요.",
+      "사도사도 부족해요...",
+    ],
+  },
+  NAPS: {
+    image: "/figma-assets/hobby-naps.png",
+    body: ["낮잠자기!", "개강을 하면 누리기 힘든 취미이기 때문에...", "방학인 지금 많이 누리려고 합니다."],
   },
 };
 
@@ -86,7 +106,7 @@ function IntroSection({ onStart }) {
   );
 }
 
-function MenuSection({ sectionRef, onAbout }) {
+function MenuSection({ sectionRef, onAbout, onHobbies }) {
   return (
     <section ref={sectionRef} className="screen menuScreen" aria-label="프로필 메뉴">
       <div className="cornerBlocks cornerBlocksLeft" aria-hidden="true">
@@ -103,7 +123,7 @@ function MenuSection({ sectionRef, onAbout }) {
               className="capsuleItem"
               type="button"
               key={item}
-              onClick={item === "ABOUT ME" ? onAbout : undefined}
+              onClick={item === "ABOUT ME" ? onAbout : item === "HOBBIES" ? onHobbies : undefined}
             >
               <Image
                 src="/figma-assets/desktop7-4.png"
@@ -118,6 +138,42 @@ function MenuSection({ sectionRef, onAbout }) {
         </div>
 
         <p className="menuGuide">캡슐을 눌러서 더 많은 정보를 확인해보세요!</p>
+      </div>
+    </section>
+  );
+}
+
+function HobbiesSection({ sectionRef, onBack, onDetail }) {
+  return (
+    <section ref={sectionRef} className="screen hobbiesScreen" aria-label="Hobbies 상세">
+      <div className="aboutCanvas">
+        <div className="aboutMainRow">
+          <button className="aboutBackButton" type="button" onClick={onBack} aria-label="프로필 메뉴로 돌아가기">
+            <Image src="/figma-assets/desktop8-back.svg" alt="" width={94} height={74} />
+          </button>
+
+          <div className="aboutCapsule">
+            <Image src="/figma-assets/desktop8-4.png" alt="" width={314} height={314} unoptimized />
+            <h2>[ HOBBIES ]</h2>
+          </div>
+        </div>
+
+        <div className="aboutFooter hobbiesFooter">
+          <nav className="hobbyNav" aria-label="Hobbies 정보">
+            {hobbyItems.map((item, index) => (
+              <button
+                className="blinkWord"
+                style={{ "--blink-delay": `${index * 0.28}s` }}
+                type="button"
+                key={item}
+                onClick={() => onDetail(item)}
+              >
+                {item}
+              </button>
+            ))}
+          </nav>
+          <p>하단의 단어를 클릭하여 더 저세한 정보를 확인해보세요!</p>
+        </div>
       </div>
     </section>
   );
@@ -199,6 +255,42 @@ function DetailSection({ sectionRef, type, onClose, onNavigate }) {
   );
 }
 
+function HobbyDetailSection({ sectionRef, type, onClose, onNavigate }) {
+  const content = hobbyContent[type];
+  const className = type.replaceAll(" ", "");
+
+  return (
+    <section ref={sectionRef} className="screen detailScreen" aria-label={`${type} 상세`}>
+      <div className="detailCanvas">
+        <article className={`infoPanel hobbyPanel hobbyPanel${className}`}>
+          <header className="infoPanelHeader">
+            <h2>{type}</h2>
+            <button type="button" onClick={onClose} aria-label={`${type} 닫기`}>X</button>
+          </header>
+          <Image
+            className="hobbyDetailImage"
+            src={content.image}
+            alt=""
+            width={320}
+            height={320}
+            unoptimized
+          />
+          <div className="infoBody hobbyInfoBody">
+            {content.body.map((line) => <p key={line}>{line}</p>)}
+          </div>
+        </article>
+
+        <nav className="hobbyDetailNav" aria-label="Hobbies 상세 메뉴">
+          {hobbyItems.map((item) => (
+            <button type="button" key={item} onClick={() => onNavigate(item)}>{item}</button>
+          ))}
+        </nav>
+        <div className="hobbyDetailLine" aria-hidden="true" />
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   const menuRef = useRef(null);
   const aboutRef = useRef(null);
@@ -206,12 +298,21 @@ export default function Home() {
   const birthdayRef = useRef(null);
   const mbtiRef = useRef(null);
   const toolsRef = useRef(null);
+  const hobbiesRef = useRef(null);
+  const gameRef = useRef(null);
+  const capsRef = useRef(null);
+  const napsRef = useRef(null);
 
   const detailRefs = {
     HOMETOWN: hometownRef,
     BIRTHDAY: birthdayRef,
     MBTI: mbtiRef,
     TOOLS: toolsRef,
+  };
+  const hobbyRefs = {
+    GAME: gameRef,
+    "COLLECTING CAPS": capsRef,
+    NAPS: napsRef,
   };
 
   const scrollTo = (ref) => {
@@ -225,7 +326,11 @@ export default function Home() {
   return (
     <main className="pageFlow">
       <IntroSection onStart={() => scrollTo(menuRef)} />
-      <MenuSection sectionRef={menuRef} onAbout={() => scrollTo(aboutRef)} />
+      <MenuSection
+        sectionRef={menuRef}
+        onAbout={() => scrollTo(aboutRef)}
+        onHobbies={() => jumpTo(hobbiesRef)}
+      />
       <AboutSection
         sectionRef={aboutRef}
         onBack={() => scrollTo(menuRef)}
@@ -238,6 +343,20 @@ export default function Home() {
           type={type}
           onClose={() => jumpTo(aboutRef)}
           onNavigate={(nextType) => jumpTo(detailRefs[nextType])}
+        />
+      ))}
+      <HobbiesSection
+        sectionRef={hobbiesRef}
+        onBack={() => jumpTo(menuRef)}
+        onDetail={(type) => jumpTo(hobbyRefs[type])}
+      />
+      {hobbyItems.map((type) => (
+        <HobbyDetailSection
+          key={type}
+          sectionRef={hobbyRefs[type]}
+          type={type}
+          onClose={() => jumpTo(hobbiesRef)}
+          onNavigate={(nextType) => jumpTo(hobbyRefs[nextType])}
         />
       ))}
     </main>
