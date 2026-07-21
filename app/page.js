@@ -106,15 +106,7 @@ function IntroSection({ onStart }) {
         />
 
         <button className="startButton" type="button" onClick={onStart}>
-          <span>Click to Start!</span>
-          <Image
-            className="cursorImage"
-            src="/figma-assets/desktop6-cursor.png"
-            alt=""
-            width={94}
-            height={94}
-            priority
-          />
+          <span>Click to Start !</span>
         </button>
       </div>
     </section>

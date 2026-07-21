@@ -112,9 +112,9 @@ button {
   position: absolute;
   left: 50%;
   bottom: 8.9svh;
-  display: grid;
-  grid-template-columns: 1fr 112px;
+  display: flex;
   align-items: center;
+  justify-content: center;
   width: min(824px, 72vw);
   height: 112px;
   padding: 0;
@@ -128,17 +128,9 @@ button {
 }
 
 .startButton span {
-  padding-left: 112px;
   font-size: 40px;
   font-weight: 500;
   line-height: 1;
-}
-
-.cursorImage {
-  width: 94px;
-  height: 94px;
-  object-fit: cover;
-  mix-blend-mode: luminosity;
 }
 
 .startButton:hover,
@@ -719,20 +711,13 @@ button {
 
   .startButton {
     bottom: 32px;
-    grid-template-columns: 1fr 76px;
     width: 100%;
     height: 88px;
     border-radius: 24px;
   }
 
   .startButton span {
-    padding-left: 76px;
     font-size: 28px;
-  }
-
-  .cursorImage {
-    width: 70px;
-    height: 70px;
   }
 
   .cornerBlocks {
