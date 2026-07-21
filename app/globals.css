@@ -45,6 +45,14 @@ button {
   scroll-snap-type: y proximity;
 }
 
+.detailOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  background: var(--mint-400);
+}
+
 .designContainer {
   position: relative;
   z-index: 1;

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const capsuleItems = ["ABOUT ME", "HOBBIES", "FAVORITES"];
 const detailItems = ["HOMETOWN", "BIRTHDAY", "MBTI", "TOOLS"];
@@ -378,43 +378,10 @@ function FavoriteDetailSection({ sectionRef, type, onClose, onNavigate }) {
 
 export default function Home() {
   const menuRef = useRef(null);
-  const aboutRef = useRef(null);
-  const hometownRef = useRef(null);
-  const birthdayRef = useRef(null);
-  const mbtiRef = useRef(null);
-  const toolsRef = useRef(null);
-  const hobbiesRef = useRef(null);
-  const gameRef = useRef(null);
-  const capsRef = useRef(null);
-  const napsRef = useRef(null);
-  const favoritesRef = useRef(null);
-  const rilakkumaRef = useRef(null);
-  const donutRef = useRef(null);
-  const coffeeRef = useRef(null);
-
-  const detailRefs = {
-    HOMETOWN: hometownRef,
-    BIRTHDAY: birthdayRef,
-    MBTI: mbtiRef,
-    TOOLS: toolsRef,
-  };
-  const hobbyRefs = {
-    GAME: gameRef,
-    "COLLECTING CAPS": capsRef,
-    NAPS: napsRef,
-  };
-  const favoriteRefs = {
-    RILAKKUMA: rilakkumaRef,
-    DONUT: donutRef,
-    COFFEE: coffeeRef,
-  };
+  const [activeView, setActiveView] = useState(null);
 
   const scrollTo = (ref) => {
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
-  const jumpTo = (ref) => {
-    ref.current?.scrollIntoView({ behavior: "instant", block: "start" });
   };
 
   return (
@@ -422,52 +389,54 @@ export default function Home() {
       <IntroSection onStart={() => scrollTo(menuRef)} />
       <MenuSection
         sectionRef={menuRef}
-        onAbout={() => jumpTo(aboutRef)}
-        onHobbies={() => jumpTo(hobbiesRef)}
-        onFavorites={() => jumpTo(favoritesRef)}
+        onAbout={() => setActiveView("ABOUT ME")}
+        onHobbies={() => setActiveView("HOBBIES")}
+        onFavorites={() => setActiveView("FAVORITES")}
       />
-      <AboutSection
-        sectionRef={aboutRef}
-        onBack={() => scrollTo(menuRef)}
-        onDetail={(type) => jumpTo(detailRefs[type])}
-      />
-      {detailItems.map((type) => (
-        <DetailSection
-          key={type}
-          sectionRef={detailRefs[type]}
-          type={type}
-          onClose={() => jumpTo(aboutRef)}
-          onNavigate={(nextType) => jumpTo(detailRefs[nextType])}
-        />
-      ))}
-      <HobbiesSection
-        sectionRef={hobbiesRef}
-        onBack={() => jumpTo(menuRef)}
-        onDetail={(type) => jumpTo(hobbyRefs[type])}
-      />
-      {hobbyItems.map((type) => (
-        <HobbyDetailSection
-          key={type}
-          sectionRef={hobbyRefs[type]}
-          type={type}
-          onClose={() => jumpTo(hobbiesRef)}
-          onNavigate={(nextType) => jumpTo(hobbyRefs[nextType])}
-        />
-      ))}
-      <FavoritesSection
-        sectionRef={favoritesRef}
-        onBack={() => jumpTo(menuRef)}
-        onDetail={(type) => jumpTo(favoriteRefs[type])}
-      />
-      {favoriteItems.map((type) => (
-        <FavoriteDetailSection
-          key={type}
-          sectionRef={favoriteRefs[type]}
-          type={type}
-          onClose={() => jumpTo(favoritesRef)}
-          onNavigate={(nextType) => jumpTo(favoriteRefs[nextType])}
-        />
-      ))}
+
+      {activeView && (
+        <div className="detailOverlay">
+          {activeView === "ABOUT ME" && (
+            <AboutSection
+              onBack={() => setActiveView(null)}
+              onDetail={setActiveView}
+            />
+          )}
+          {detailItems.includes(activeView) && (
+            <DetailSection
+              type={activeView}
+              onClose={() => setActiveView("ABOUT ME")}
+              onNavigate={setActiveView}
+            />
+          )}
+          {activeView === "HOBBIES" && (
+            <HobbiesSection
+              onBack={() => setActiveView(null)}
+              onDetail={setActiveView}
+            />
+          )}
+          {hobbyItems.includes(activeView) && (
+            <HobbyDetailSection
+              type={activeView}
+              onClose={() => setActiveView("HOBBIES")}
+              onNavigate={setActiveView}
+            />
+          )}
+          {activeView === "FAVORITES" && (
+            <FavoritesSection
+              onBack={() => setActiveView(null)}
+              onDetail={setActiveView}
+            />
+          )}
+          {favoriteItems.includes(activeView) && (
+            <FavoriteDetailSection
+              type={activeView}
+              onClose={() => setActiveView("FAVORITES")}
+              onNavigate={setActiveView}
+            />
+          )}
+        </div>
+      )}
     </main>
   );
 }
