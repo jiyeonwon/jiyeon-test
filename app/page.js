@@ -1,19 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useRef } from "react";
 
 const capsuleItems = ["ABOUT ME", "HOBBIES", "FAVORITES"];
+const detailItems = ["HOMETOWN", "BIRTHDAY", "MBTI", "TOOLS"];
 
-function GridOverlay() {
-  return <div className="gridOverlay" aria-hidden="true" />;
-}
-
-function IntroScreen({ onStart }) {
+function IntroSection({ onStart }) {
   return (
-    <main className="screen introScreen">
-      <GridOverlay />
-
+    <section className="screen introScreen" aria-label="소개">
       <div className="designContainer introLayout">
         <h1>WON JIYEON</h1>
 
@@ -46,14 +41,13 @@ function IntroScreen({ onStart }) {
           />
         </button>
       </div>
-    </main>
+    </section>
   );
 }
 
-function MenuScreen() {
+function MenuSection({ sectionRef, onAbout }) {
   return (
-    <main className="screen menuScreen">
-      <GridOverlay />
+    <section ref={sectionRef} className="screen menuScreen" aria-label="프로필 메뉴">
       <div className="cornerBlocks cornerBlocksLeft" aria-hidden="true">
         <i /><i /><i />
       </div>
@@ -62,9 +56,14 @@ function MenuScreen() {
       </div>
 
       <div className="designContainer menuLayout">
-        <section className="capsuleMenu" aria-label="프로필 메뉴">
+        <div className="capsuleMenu">
           {capsuleItems.map((item) => (
-            <button className="capsuleItem" type="button" key={item}>
+            <button
+              className="capsuleItem"
+              type="button"
+              key={item}
+              onClick={item === "ABOUT ME" ? onAbout : undefined}
+            >
               <Image
                 src="/figma-assets/desktop7-4.png"
                 alt=""
@@ -75,20 +74,65 @@ function MenuScreen() {
               <span>[ {item} ]</span>
             </button>
           ))}
-        </section>
+        </div>
 
         <p className="menuGuide">캡슐을 눌러서 더 많은 정보를 확인해보세요!</p>
       </div>
-    </main>
+    </section>
+  );
+}
+
+function AboutSection({ sectionRef, onBack }) {
+  return (
+    <section ref={sectionRef} className="screen aboutScreen" aria-label="About Me 상세">
+      <button className="backButton" type="button" onClick={onBack} aria-label="프로필 메뉴로 돌아가기">
+        <Image src="/figma-assets/desktop8-back.svg" alt="" width={109} height={99} />
+      </button>
+
+      <div className="designContainer aboutLayout">
+        <div className="aboutCapsule">
+          <Image
+            src="/figma-assets/desktop8-4.png"
+            alt=""
+            width={314}
+            height={314}
+            unoptimized
+          />
+          <h2>[ ABOUT ME ]</h2>
+        </div>
+
+        <nav className="detailNav" aria-label="About Me 정보">
+          {detailItems.map((item, index) => (
+            <button
+              className="blinkWord"
+              style={{ "--blink-delay": `${index * 0.28}s` }}
+              type="button"
+              key={item}
+            >
+              {item}
+            </button>
+          ))}
+        </nav>
+
+        <p className="aboutGuide">하단의 단어를 클릭하여 더 자세한 정보를 확인해보세요!</p>
+      </div>
+    </section>
   );
 }
 
 export default function Home() {
-  const [hasStarted, setHasStarted] = useState(false);
+  const menuRef = useRef(null);
+  const aboutRef = useRef(null);
 
-  return hasStarted ? (
-    <MenuScreen />
-  ) : (
-    <IntroScreen onStart={() => setHasStarted(true)} />
+  const scrollTo = (ref) => {
+    ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  return (
+    <main className="pageFlow">
+      <IntroSection onStart={() => scrollTo(menuRef)} />
+      <MenuSection sectionRef={menuRef} onAbout={() => scrollTo(aboutRef)} />
+      <AboutSection sectionRef={aboutRef} onBack={() => scrollTo(menuRef)} />
+    </main>
   );
 }

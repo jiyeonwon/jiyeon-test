@@ -23,6 +23,10 @@ body {
   background: var(--mint-400);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 button {
   color: inherit;
   font: inherit;
@@ -33,6 +37,12 @@ button {
   min-height: 100svh;
   overflow: hidden;
   background: var(--mint-400);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.pageFlow {
+  scroll-snap-type: y proximity;
 }
 
 .designContainer {
@@ -41,21 +51,6 @@ button {
   width: min(var(--container), calc(100% - 192px));
   min-height: 100svh;
   margin: 0 auto;
-}
-
-.gridOverlay {
-  position: absolute;
-  inset: 0;
-  width: min(var(--container), calc(100% - 192px));
-  margin: 0 auto;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    to right,
-    rgba(252, 220, 255, 0.07) 0,
-    rgba(252, 220, 255, 0.07) calc((100% - 264px) / 12),
-    transparent calc((100% - 264px) / 12),
-    transparent calc((100% - 264px) / 12 + 24px)
-  );
 }
 
 .introLayout h1 {
@@ -182,6 +177,109 @@ button {
   text-align: center;
 }
 
+.aboutLayout {
+  min-height: 100svh;
+}
+
+.backButton {
+  position: absolute;
+  z-index: 3;
+  top: 58px;
+  left: 24px;
+  width: 109px;
+  height: 99px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 180ms ease;
+}
+
+.backButton img {
+  width: 100%;
+  height: 100%;
+}
+
+.backButton:hover,
+.backButton:focus-visible {
+  outline: none;
+  transform: translateX(-8px);
+}
+
+.aboutCapsule {
+  position: absolute;
+  top: 10.2svh;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateX(-50%);
+}
+
+.aboutCapsule img {
+  width: 512px;
+  height: 512px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.aboutCapsule h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 40px;
+}
+
+.detailNav {
+  position: absolute;
+  right: 12px;
+  bottom: 167px;
+  left: 13px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--black);
+}
+
+.blinkWord {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 40px;
+  cursor: pointer;
+  animation: blinkWord 1.7s steps(2, jump-none) infinite;
+  animation-delay: var(--blink-delay);
+}
+
+.blinkWord:hover,
+.blinkWord:focus-visible {
+  animation-play-state: paused;
+  opacity: 1;
+  outline: 1px solid var(--black);
+  outline-offset: 8px;
+}
+
+.aboutGuide {
+  position: absolute;
+  right: 0;
+  bottom: 39px;
+  left: 0;
+  margin: 0;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 40px;
+  text-align: center;
+}
+
+@keyframes blinkWord {
+  0%, 42% { opacity: 1; }
+  43%, 72% { opacity: 0.18; }
+  73%, 100% { opacity: 1; }
+}
+
 .cornerBlocks {
   position: absolute;
   z-index: 2;
@@ -216,19 +314,8 @@ button {
 .cornerBlocksRight i:nth-child(3) { grid-area: 3 / 2; }
 
 @media (max-width: 900px) {
-  .designContainer,
-  .gridOverlay {
+  .designContainer {
     width: calc(100% - 40px);
-  }
-
-  .gridOverlay {
-    background: repeating-linear-gradient(
-      to right,
-      rgba(252, 220, 255, 0.07) 0,
-      rgba(252, 220, 255, 0.07) calc((100% - 56px) / 4),
-      transparent calc((100% - 56px) / 4),
-      transparent calc((100% - 56px) / 4 + 16px)
-    );
   }
 
   .introLayout h1 {
@@ -301,6 +388,48 @@ button {
     padding-top: 18px;
     font-size: 20px;
   }
+
+  .backButton {
+    top: 24px;
+    left: 12px;
+    width: 58px;
+    height: 54px;
+  }
+
+  .aboutCapsule {
+    top: 13svh;
+  }
+
+  .aboutCapsule img {
+    width: min(82vw, 360px);
+    height: min(82vw, 360px);
+  }
+
+  .aboutCapsule h2 {
+    font-size: 19px;
+    line-height: 30px;
+  }
+
+  .detailNav {
+    right: 0;
+    bottom: 132px;
+    left: 0;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 12px;
+    padding-bottom: 24px;
+  }
+
+  .blinkWord {
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  .aboutGuide {
+    bottom: 30px;
+    padding: 0 10px;
+    font-size: 18px;
+    line-height: 28px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -309,5 +438,7 @@ button {
   *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
