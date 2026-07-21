@@ -60,6 +60,16 @@ function IntroSection({ onStart }) {
           </div>
         </div>
 
+        <Image
+          className="introCharacter"
+          src="/figma-assets/desktop6-character.png"
+          alt="민트색 픽셀 캐릭터"
+          width={264}
+          height={264}
+          unoptimized
+          priority
+        />
+
         <button className="startButton" type="button" onClick={onStart}>
           <span>Click to Start!</span>
           <Image
