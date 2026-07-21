@@ -694,7 +694,7 @@ button {
 }
 
 .favoritePanelCOFFEE .favoriteDetailImage {
-  top: 16.3410302%;
+  top: 14.74245115%;
   width: 34.84107579%;
 }
 
@@ -707,7 +707,8 @@ button {
 }
 
 .favoritePanelCOFFEE .favoriteInfoBody {
-  top: 69.80461812%;
+  top: 65.36412078%;
+  line-height: clamp(20px, 3.90625cqh, 40px);
 }
 
 .favoriteDetailNav {
