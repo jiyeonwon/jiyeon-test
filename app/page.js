@@ -138,13 +138,15 @@ function MenuSection({ sectionRef, onAbout, onHobbies, onFavorites }) {
                     : onFavorites
               }
             >
-              <Image
-                src="/figma-assets/desktop7-4.png"
-                alt=""
-                width={314}
-                height={314}
-                unoptimized
-              />
+              <div className="capsuleFloat">
+                <Image
+                  src="/figma-assets/desktop7-4.png"
+                  alt=""
+                  width={314}
+                  height={314}
+                  unoptimized
+                />
+              </div>
               <span>[ {item} ]</span>
             </button>
           ))}

@@ -65,10 +65,10 @@ button {
 .introLayout h1 {
   position: absolute;
   top: 7.2svh;
-  left: 0;
+  left: -28px;
   margin: 0;
   font-size: 40px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.5;
   letter-spacing: 0;
 }
@@ -76,7 +76,7 @@ button {
 .profileCopy {
   position: absolute;
   top: 7.2svh;
-  right: -73px;
+  right: -167px;
   width: 367px;
   font-size: 20px;
   font-weight: 500;
@@ -192,6 +192,32 @@ button {
   object-fit: contain;
   image-rendering: pixelated;
   transition: transform 180ms ease;
+}
+
+.capsuleFloat {
+  display: flex;
+  transform-origin: 50% 100%;
+  animation: capsuleIdle 3s ease-in-out infinite backwards;
+  will-change: transform;
+}
+
+.capsuleItem:nth-child(2) .capsuleFloat {
+  animation-delay: 0.4s;
+}
+
+.capsuleItem:nth-child(3) .capsuleFloat {
+  animation-delay: 0.8s;
+}
+
+@keyframes capsuleIdle {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-0.5deg) scaleY(0.985);
+  }
+
+  50% {
+    transform: translateY(-7px) rotate(1deg) scaleY(1.01);
+  }
 }
 
 .capsuleItem span {
@@ -701,6 +727,7 @@ button {
 
   .introLayout h1 {
     top: 32px;
+    left: 0;
     font-size: 34px;
   }
 
